@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class testHref : MonoBehaviour
 {
-    public LinkImageText textPic;
+    private LinkImageText textPic;
 
     void Awake()
     {
@@ -21,6 +22,8 @@ public class testHref : MonoBehaviour
 
     private void OnHrefClick(string hrefName)
     {
+        Text text = GameObject.Find("TextResult").GetComponent<Text>();
+        text.text = "点击了" + hrefName;
         Debug.Log("点击了 " + hrefName);
     }
 }

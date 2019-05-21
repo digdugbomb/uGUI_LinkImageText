@@ -7,20 +7,19 @@ public static class MenuOptions
 {
     private static MethodInfo m_PlaceUIElementRoot;
 
-    [MenuItem("GameObject/UI/LinkImageText", false, 2004)]
+    [MenuItem("GameObject/UI/LinkImageText", false, 2001)]
     public static void AddText(MenuCommand menuCommand)
     {
-        GameObject child = new GameObject("Text");
-        RectTransform rectTransform = child.AddComponent<RectTransform>();
+        GameObject linkImageTextGameObject = new GameObject("Text");
+        RectTransform rectTransform = linkImageTextGameObject.AddComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(160f, 30f);
-        LinkImageText lbl = child.AddComponent<LinkImageText>();
-        lbl.text = "New LinkImageText";
-        lbl.color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 1f);
+        LinkImageText linkImageTextComponent = linkImageTextGameObject.AddComponent<LinkImageText>();
+        linkImageTextComponent.text = "New LinkImageText";
+        linkImageTextComponent.color = new Color(50f / 255f, 50f / 255f, 50f / 255f, 1f);
 #if UNITY_5_3_OR_NEWER
-        lbl.alignByGeometry = true;
+        linkImageTextComponent.alignByGeometry = true;
 #endif
-
-        PlaceUIElementRoot(child, menuCommand);
+        PlaceUIElementRoot(linkImageTextGameObject, menuCommand);
     }
 
     private static void PlaceUIElementRoot(GameObject element, MenuCommand menuCommand)

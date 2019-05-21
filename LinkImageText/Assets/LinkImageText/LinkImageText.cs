@@ -183,6 +183,7 @@ public class LinkImageText : Text, IPointerClickHandler
             toFill.PopulateUIVertex(ref vert, hrefInfo.startIndex);
             var pos = vert.position;
             var bounds = new Bounds(pos, Vector3.zero);
+            Vector3 previousPos = Vector3.zero;
             for (int i = hrefInfo.startIndex, m = hrefInfo.endIndex; i < m; i++)
             {
                 if (i >= toFill.currentVertCount)
@@ -192,7 +193,11 @@ public class LinkImageText : Text, IPointerClickHandler
 
                 toFill.PopulateUIVertex(ref vert, i);
                 pos = vert.position;
-                if (pos.x < bounds.min.x) // 换行重新添加包围框
+                if ((i - hrefInfo.startIndex) % 4 == 1)
+                {
+                    previousPos = pos;
+                }
+                if (previousPos != Vector3.zero && (i - hrefInfo.startIndex) % 4 == 0 && pos.x < previousPos.x) // 换行重新添加包围框
                 {
                     hrefInfo.boxes.Add(new Rect(bounds.min, bounds.size));
                     bounds = new Bounds(pos, Vector3.zero);
